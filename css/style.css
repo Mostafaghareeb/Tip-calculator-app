@@ -140,7 +140,7 @@ p span {
     opacity: .2;
     transition: .5s;
 }
-.active:hover {
+.active {
     background-color: var(--Strong-cyan);
     opacity: 1;
 }

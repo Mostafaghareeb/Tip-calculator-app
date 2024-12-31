@@ -6,7 +6,7 @@ let totalTip = document.querySelector("#total-tip");
 let customBtn = document.querySelector(".custom-btn");
 let resetBtn = document.querySelector(".reset");
 
-let x = tipAmount.innerHTML;
+let mainAmount = tipAmount.innerHTML;
 
 tipBtns.forEach((e) => {
     e.onclick = function () {
@@ -16,6 +16,7 @@ tipBtns.forEach((e) => {
             
             let total = (Number(coastInp.value) + (coastInp.value * e.value)) / peopleInp.value;
             totalTip.innerHTML = `$${total.toFixed(2)}`
+            reset();
         }
     }
 })
@@ -23,24 +24,26 @@ tipBtns.forEach((e) => {
 customBtn.onblur = function () {
     if (customBtn.value !== "") {
         customTip();
+        reset();
     }
 }
+
 
 function reset() {
+    resetBtn.classList.add("active");
     resetBtn.onclick = function () {
-        if (tipAmount.innerHTML !== x) {
-            resetBtn.classList.add("active");
-            tipAmount.innerHTML = x;
-            totalTip.innerHTML = x;
+        if (tipAmount.innerHTML !== mainAmount) {
+            tipAmount.innerHTML = mainAmount;
+            totalTip.innerHTML = mainAmount;
+            coastInp.value = "";
+            peopleInp.value = "";
+            customBtn.value = "";
             setTimeout(() => {
                 resetBtn.classList.remove("active"); 
-            }, 800);
-
-        }
-    }
-
-}
-reset();
+            }, 250);
+        };
+    };
+};
 
 function customTip() {
     let customValue = customBtn.value / 100;
